@@ -1,0 +1,12 @@
+/node_modules/
+/dist/
+/public/tesseract/
+/test-results/
+/demo-video/
+/playwright-report/
+**/.DS_Store
+.env
+.env.*
+*.pem
+*.key
+/.kiro/**/tasks.meta.json

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Policy Replay</title>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="header">
+        <h1>Policy Replay</h1>
+        <p class="lead">Dry-run a written support policy. Load two scans, OCR them locally in your browser, and compare where two pinned cases would be routed.</p>
+        <p class="disclosure" data-testid="disclosure">
+          <strong>How it reads:</strong> this tool reads only simple, explicit English if/then routing rules of the form
+          &ldquo;If a damaged return includes a photo / has no photo, send it to &lt;destination&gt;.&rdquo; for these two cases.
+          Anything else gives no route. The source scan is always shown so a human can review it. Scans never leave this browser.
+        </p>
+      </header>
+
+      <section class="panel" aria-labelledby="slots-h">
+        <h2 id="slots-h">Policy scans</h2>
+        <div class="actions">
+          <button type="button" class="btn primary" id="load-examples" data-testid="load-examples">Load built-in example scans</button>
+          <p id="message" class="message" role="status" aria-live="polite" data-testid="message"></p>
+        </div>
+        <div class="slots">
+          <div class="slot" data-testid="slot-V1">
+            <h3>V1 scan</h3>
+            <p class="slot-status" id="scan-status-V1" data-testid="scan-status-V1" aria-live="polite">No scan loaded</p>
+            <label class="file-label" for="file-V1">Upload V1 scan (PNG or JPEG)</label>
+            <input type="file" id="file-V1" data-testid="file-V1" accept="image/png,image/jpeg" />
+          </div>
+          <div class="slot" data-testid="slot-V2">
+            <h3>V2 scan</h3>
+            <p class="slot-status" id="scan-status-V2" data-testid="scan-status-V2" aria-live="polite">No scan loaded</p>
+            <label class="file-label" for="file-V2">Upload V2 scan (PNG or JPEG)</label>
+            <input type="file" id="file-V2" data-testid="file-V2" accept="image/png,image/jpeg" />
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="compare-h">
+        <h2 id="compare-h">Comparison</h2>
+        <fieldset class="choice">
+          <legend>Case</legend>
+          <label class="choice-item"><input type="radio" name="case" value="with-photo" data-testid="case-with-photo" checked /> <span>Damaged return with photo</span></label>
+          <label class="choice-item"><input type="radio" name="case" value="no-photo" data-testid="case-no-photo" /> <span>Damaged return without photo</span></label>
+        </fieldset>
+        <div id="compare" class="cases"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="source-h">
+        <h2 id="source-h">Source scan</h2>
+        <fieldset class="choice">
+          <legend>Source view</legend>
+          <label class="choice-item"><input type="radio" name="view" value="V1" data-testid="view-V1" checked /> <span>V1</span></label>
+          <label class="choice-item"><input type="radio" name="view" value="V2" data-testid="view-V2" /> <span>V2</span></label>
+        </fieldset>
+        <div class="evidence-bar">
+          <button type="button" class="btn" id="show-on-scan" data-testid="show-on-scan" hidden>Show on scan</button>
+          <p id="evidence-note" class="muted"></p>
+        </div>
+        <div id="quote-region" class="quote-region" aria-live="polite"></div>
+        <figure class="viewer">
+          <div class="stage" id="stage" hidden>
+            <img id="scan-img" alt="" />
+          </div>
+          <p class="empty" id="viewer-empty">No scan loaded in this slot.</p>
+          <figcaption id="viewer-caption" class="caption"></figcaption>
+        </figure>
+      </section>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

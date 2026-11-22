@@ -1,0 +1,28 @@
+{
+  "name": "policy-replay",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "ocr:check": "node scripts/ocr-check.mjs",
+    "prepare:ocr": "node scripts/prepare-ocr.mjs",
+    "smoke": "node scripts/smoke.mjs",
+    "render:scans": "node scripts/render-scans.mjs",
+    "postinstall": "npm run prepare:ocr",
+    "typecheck": "tsc --noEmit",
+    "check:hosting": "node scripts/check-hosting.mjs"
+  },
+  "dependencies": {
+    "@tesseract.js-data/eng": "^1.0.0",
+    "playwright-core": "^1.65.1",
+    "tesseract.js": "^7.0.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.1"
+  },
+  "license": "MIT"
+}
